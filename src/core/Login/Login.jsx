@@ -46,7 +46,8 @@ const Login = () => {
 				email: "",
 				password: "",
 			});
-        }
+    toast.error("Error Occured! Enter All Required Fields")
+    }
       })
       .catch((e) => console.log(e));
   };
