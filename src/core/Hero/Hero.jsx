@@ -7,8 +7,11 @@ import "./Hero.css";
 import HeroImage from "../../assets/images/hero-center.png";
 import PotText from "../../assets/images/pot-text.png";
 import RightSide from "../../assets/images/right-side.png";
+import { useHistory } from "react-router-dom";
 
 const Hero = () => {
+	const history = useHistory();
+
 	return (
 		<div className="hero-main max-w-aut7xl mx-0 px-3 sm:pl-12 px-auto py-12 xl:px-40 lg:py-32 lg:min-h-[700px] lg:overflow-hidden">
 			<div className="md:flex items-center justify-between">
@@ -36,10 +39,14 @@ const Hero = () => {
 					{/* Buy button */}
 					<div className="flex max-w-200  justify-start space-x-4">
 						<ButtonRightIcon
+							onClick={() => history.push("/Shopping")}
 							text="Buy Now"
 							className=""
 						></ButtonRightIcon>
-						<ButtonLeftIcon text="Upload Photo"></ButtonLeftIcon>
+						<ButtonLeftIcon
+							text="Upload Photo"
+							onClick={() => history.push("/care")}
+						></ButtonLeftIcon>
 					</div>
 				</div>
 

@@ -11,7 +11,7 @@ import Search from "../../Components/Search/Search";
 const navigation = [
 	{ name: "Home", href: "/", current: false },
 	{ name: "Shop", href: "/Shopping", current: false },
-	{ name: "Video", href: "#", current: false },
+	{ name: "Video", href: "/care", current: false },
 	{ name: "Blog", href: "#", current: false },
 ];
 
@@ -180,7 +180,7 @@ const Header = () => {
 									</Link>
 									<Link
 										to={"/signup"}
-										className=" text-gray-900 bg-pink-100 hover:bg-pink-800 hover:text-pink-50
+										className=" ml-4 text-gray-100 bg-pink-500 hover:bg-pink-800 hover:text-pink-50
                           px-3 py-2 rounded-md font-medium "
 										aria-current="undefined"
 									>
@@ -211,6 +211,8 @@ const Header = () => {
 									</p>
 								</Link>
 							)}
+							{/* search */}
+							<Search className="pt-6" />
 						</div>
 					</Disclosure.Panel>
 				</>

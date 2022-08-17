@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { getProducts } from "../../core/helper/coreapicalls";
 import { SearchIcon } from "@heroicons/react/solid";
+import { useHistory } from "react-router-dom";
 
 const Search = () => {
 	const [searchInp, setSearchInp] = useState("");
 	const [filteredArray, setFilteredArray] = useState([]);
 	const [initialArray, setInitialArray] = useState([]);
 	const [isActivated, setIsActivated] = useState(false);
+	const history = useHistory();
 
 	const handleChange = (event) => {
 		const value = event.target.value;
@@ -35,28 +37,28 @@ const Search = () => {
 		return (
 			<div className="flex rounded-t-sm rounded-b-sm flex-col absolute top-10 z-50 max-h-[70vh] overflow-hidden">
 				{filteredArray.map((item, id) => (
-					<a
-						href={"/single/" + item.id}
+					<div
+						onClick={() => history.push("/single/" + item.id)}
 						key={id}
 						className="margin-0 cursor-pointer border-b border-gray-200 bg-white p-4 flex flex-col justify-between leading-normal"
 					>
 						<p className=" text-gray-800 font-medium text-base">
 							{item.name}
 						</p>
-					</a>
+					</div>
 				))}
 			</div>
 		);
 	};
 	return (
 		<div
-			className="flex items-center relative"
+			className="flex items-center relative pt-4 sm:pt-0"
 			onFocus={handleFocus}
 			onBlur={() => {
 				// console.log("blur");
 				setTimeout(() => {
 					setFilteredArray([]);
-				}, 500);
+				}, 50);
 			}}
 		>
 			<input

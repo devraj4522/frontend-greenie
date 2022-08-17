@@ -91,7 +91,7 @@ const CardGallery = (props) => {
 					<Product product={product} key={id} />
 				))}
 				{/* Loading spinner */}
-				{!products && (
+				{products.length === 0 && (
 					<div className="mx-0 sm:px-12 md: pb-6 xl:px-40 lg:pb-12">
 						<div class="flex justify-center items-center">
 							<div role="status">

@@ -14,6 +14,7 @@ import { ThemeProvider } from "@material-tailwind/react";
 import SingleCategory from "./core/SingleCategory/SingleCategory";
 import Profile from "./core/Profile/Profile";
 import Contact from "./core/Contact/Contact";
+import PlantCare from "./core/PlantCare/PlantCare";
 
 const Routes = () => {
 	return (
@@ -25,6 +26,7 @@ const Routes = () => {
 					<Route path="/signin" exact component={Login} />
 					<Route path="/shopping" exact component={Shopping} />
 					<Route path="/contact" exact component={Contact} />
+					<Route path="/care" exact component={PlantCare} />
 					<Route path="/cart" exact component={Cart} />
 					<Route
 						path="/category/:id"
