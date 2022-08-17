@@ -31,14 +31,14 @@ const Header = () => {
 	return (
 		<Disclosure
 			as="nav"
-			className="header-main inherit max-w-aut7xl mx-0 sm:px-12 xl:px-40"
+			className="header-main inherit max-w-aut7xl mx-0 px-2 sm:px-12 xl:px-40"
 		>
 			{({ open }) => (
 				<>
 					<div className="relative flex items-center justify-between h-20">
 						<div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
 							{/* Mobile menu button*/}
-							<Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+							<Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-50 hover:text-white hover:bg-[#aba05e] focus:outline-none focus:ring-2 focus:ring-inset bg-[#9b9154] focus:ring-[#d1c36c]">
 								<span className="sr-only">Open main menu</span>
 								{open ? (
 									<XIcon
@@ -123,6 +123,28 @@ const Header = () => {
 						</div>
 					</div>
 					<div className="flex-grow border-t border-slate-400"></div>
+					<Disclosure.Panel className="sm:hidden">
+						<div className="px-2 pt-2 pb-3 space-y-1">
+							{navigation.map((item) => (
+								<Link
+									key={item.name}
+									// as="a"
+									to={item.href}
+									className={classNames(
+										item.current
+											? "bg-[#aba05e] text-white"
+											: "text-gray-800 hover:bg-[#aba05e] hover:text-white",
+										"block px-3 py-2 rounded-md text-base font-medium"
+									)}
+									aria-current={
+										item.current ? "page" : undefined
+									}
+								>
+									{item.name}
+								</Link>
+							))}
+						</div>
+					</Disclosure.Panel>
 				</>
 			)}
 		</Disclosure>
