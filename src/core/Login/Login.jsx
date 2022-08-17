@@ -9,15 +9,14 @@ import { toast } from "react-hot-toast";
 const Login = () => {
   const [values, setValues] = useState({
     name: "",
-    email: "demo@demo.in",
-    password: "demo",
+    email: "",
+    password: "",
     error: "",
     success: false,
     loading: false,
     didRedirect: false,
   });
-  const { name, email, password, error, success, loading, didRedirect } =
-    values;
+  const { name, email, password, error, success, loading, didRedirect } =values;
 
   const handleChange = (name) => (event) => {
     setValues({ ...values, error: false, [name]: event.target.value });
@@ -29,7 +28,7 @@ const Login = () => {
 
     signin({ email, password })
       .then((data) => {
-        console.log("DATA", data);
+        // console.log("DATA", data);
         if (data.token) {
           //let sessionToken = data.token;
           authenticate(data, () => {
@@ -41,9 +40,12 @@ const Login = () => {
           });
         } else {
           setValues({
-            ...values,
-            loading: false,
-          });
+				...values,
+				loading: false,
+				name: "",
+				email: "",
+				password: "",
+			});
         }
       })
       .catch((e) => console.log(e));

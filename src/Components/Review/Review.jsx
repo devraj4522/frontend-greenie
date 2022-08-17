@@ -1,17 +1,14 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { getProductReviews } from "../../core/helper/coreapicalls";
 import AddReview from "./AddReview";
 
 const Review = ({ product }) => {
 	const [review, setreview] = useState([]);
 	const [reload, setReload] = useState(false);
-	const ref = useRef(0);
 
 	useEffect(() => {
 		getProductReviews(product.id).then((rev) => setreview(rev));
 	}, [reload]);
-
-	console.log(ref);
 
 	// return {xyz:12, 'month'}
 	const getTimeAgo = (strdate) => {

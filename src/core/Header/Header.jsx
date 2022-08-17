@@ -3,7 +3,7 @@ import { Disclosure } from "@headlessui/react";
 import "./Header.css";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { isAuthenticated, signout } from "../../auth/helper";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { ShoppingBagIcon } from "@heroicons/react/solid";
 import { loadCart } from "../helper/cartHelper";
 import Search from "../../Components/Search/Search";
