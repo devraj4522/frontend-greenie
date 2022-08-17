@@ -1,0 +1,14 @@
+.section2-main {
+  background: #78350f;
+}
+
+.section2-sepearte:after {
+  content: "";
+  background-color: #000;
+  position: absolute;
+  width: 50px;
+  height: 100px;
+  top: 10px;
+  left: 50%;
+  display: block;
+}

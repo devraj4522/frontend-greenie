@@ -1,0 +1,10 @@
+ul li::before {
+  content: attr(data-icon);
+  /* Make slightly larger than the li font-size
+    but smaller than the li gap */
+  color: red !important;
+}
+
+.singleMain {
+  background-color: #ebe7ce;
+}
