@@ -38,7 +38,7 @@ const Category = () => {
 		);
 	};
 	return (
-		<section className="mx-0 sm:px-12 md: lg:pt-12 pt-6 pb-6 xl:px-40 lg:pb-12 text-gray-600 body-font">
+		<section className="mx-0 px-4 text-center sm:text-left sm:px-12 md: lg:pt-12 pt-6 pb-6 xl:px-40 lg:pb-12 text-gray-600 body-font">
 			<div className="container mx-auto">
 				<h2 className=" title-font font-bold text-4xl mb-10">
 					{" "}

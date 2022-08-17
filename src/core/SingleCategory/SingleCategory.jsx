@@ -84,7 +84,7 @@ const SingleCategory = () => {
 		);
 	return (
 		<Base>
-			<div className="bg-[#ebe7ce] mx-0 sm:px-12 md: pt-6 lg:pt-12  pb-6 xl:px-40 lg:pb-12">
+			<div className="bg-[#ebe7ce] mx-0 sm:px-12 md: pt-6 lg:pt-12  pb-6 xl:px-40 lg:pb-12  px-4 text-center sm:text-left">
 				{/* <!-- Component Start --> */}
 				<h1 className="text-4xl font-bold pb-2">
 					Buy Your Favourite Plant

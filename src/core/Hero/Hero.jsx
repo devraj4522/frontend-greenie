@@ -34,8 +34,11 @@ const Hero = () => {
 						</p>
 					</div>
 					{/* Buy button */}
-					<div className="flex flex-col max-w-200  md:flex-row md:justify-start md:space-x-4">
-						<ButtonRightIcon text="Buy Now"></ButtonRightIcon>
+					<div className="flex max-w-200  justify-start space-x-4">
+						<ButtonRightIcon
+							text="Buy Now"
+							className=""
+						></ButtonRightIcon>
 						<ButtonLeftIcon text="Upload Photo"></ButtonLeftIcon>
 					</div>
 				</div>

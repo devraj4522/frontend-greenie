@@ -83,18 +83,20 @@ const Header = () => {
 											{item.name}
 										</Link>
 									))}
-									<Link
-										to={"/cart"}
-										className="flex relative"
-									>
-										<ShoppingBagIcon className="w-7 hover:text-gray-800 text-orange-600" />
-										<p
-											style={{ fontSize: "10px" }}
-											className=" absolute -bottom-1 -right-1"
+									{isAuthenticated() && (
+										<Link
+											to={"/cart"}
+											className="flex relative"
 										>
-											{products && products.length}
-										</p>
-									</Link>
+											<ShoppingBagIcon className="w-7 hover:text-gray-800 text-orange-600" />
+											<p
+												style={{ fontSize: "10px" }}
+												className=" absolute -bottom-1 -right-1"
+											>
+												{products && products.length}
+											</p>
+										</Link>
+									)}
 								</div>
 							</div>
 						</div>
@@ -143,6 +145,29 @@ const Header = () => {
 									{item.name}
 								</Link>
 							))}
+
+							{!isAuthenticated() && (
+								<Link
+									to={"/signin"}
+									className=" text-gray-900 bg-pink-100 hover:bg-pink-800 hover:text-pink-50
+                          px-3 py-2 rounded-md font-medium "
+									aria-current="undefined"
+								>
+									Sign In
+								</Link>
+							)}
+
+							{isAuthenticated() && (
+								<Link to={"/cart"} className="flex relative">
+									<ShoppingBagIcon className="w-7 hover:text-gray-800 text-orange-600" />
+									<p
+										style={{ fontSize: "10px" }}
+										className=" absolute -bottom-1 -right-1"
+									>
+										{products && products.length}
+									</p>
+								</Link>
+							)}
 						</div>
 					</Disclosure.Panel>
 				</>
