@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Disclosure } from "@headlessui/react";
 import "./Header.css";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
-import { isAuthenticated } from "../../auth/helper";
+import { isAuthenticated, signout } from "../../auth/helper";
 import { Link } from "react-router-dom";
 import { ShoppingBagIcon } from "@heroicons/react/solid";
 import { loadCart } from "../helper/cartHelper";
@@ -104,15 +104,38 @@ const Header = () => {
 							{/* search */}
 							<Search />
 
-							{!isAuthenticated() && (
-								<Link
-									to={"/signin"}
+							{!isAuthenticated() ? (
+								<>
+									<Link
+										to={"/signin"}
+										className=" text-gray-900 bg-pink-100 hover:bg-pink-800 hover:text-pink-50
+                          px-3 py-2 rounded-md font-medium "
+										aria-current="undefined"
+									>
+										Login
+									</Link>
+									<Link
+										to={"/signup"}
+										className=" text-gray-900 bg-pink-100 hover:bg-pink-800 hover:text-pink-50
+                          px-3 py-2 rounded-md font-medium "
+										aria-current="undefined"
+									>
+										SignUp
+									</Link>
+								</>
+							) : (
+								<button
+									onClick={() => {
+										signout(() => {
+											return <Redirect to="/" />;
+										});
+									}}
 									className=" text-gray-900 bg-pink-100 hover:bg-pink-800 hover:text-pink-50
                           px-3 py-2 rounded-md font-medium "
 									aria-current="undefined"
 								>
-									Sign In
-								</Link>
+									Logout
+								</button>
 							)}
 							<Link
 								to="/contact"
@@ -146,15 +169,38 @@ const Header = () => {
 								</Link>
 							))}
 
-							{!isAuthenticated() && (
-								<Link
-									to={"/signin"}
+							{!isAuthenticated() ? (
+								<>
+									<Link
+										to={"/signin"}
+										className=" text-gray-900 bg-pink-100 hover:bg-pink-800 hover:text-pink-50
+                          px-3 py-2 rounded-md font-medium "
+										aria-current="undefined"
+									>
+										Sign In
+									</Link>
+									<Link
+										to={"/signup"}
+										className=" text-gray-900 bg-pink-100 hover:bg-pink-800 hover:text-pink-50
+                          px-3 py-2 rounded-md font-medium "
+										aria-current="undefined"
+									>
+										SignUp
+									</Link>
+								</>
+							) : (
+								<button
+									onClick={() => {
+										signout(() => {
+											return <Redirect to="/" />;
+										});
+									}}
 									className=" text-gray-900 bg-pink-100 hover:bg-pink-800 hover:text-pink-50
                           px-3 py-2 rounded-md font-medium "
 									aria-current="undefined"
 								>
-									Sign In
-								</Link>
+									Logout
+								</button>
 							)}
 
 							{isAuthenticated() && (
