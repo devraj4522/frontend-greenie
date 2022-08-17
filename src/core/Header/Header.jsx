@@ -3,7 +3,7 @@ import { Disclosure } from "@headlessui/react";
 import "./Header.css";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { isAuthenticated, signout } from "../../auth/helper";
-import { Link, Redirect } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { ShoppingBagIcon } from "@heroicons/react/solid";
 import { loadCart } from "../helper/cartHelper";
 import Search from "../../Components/Search/Search";
@@ -21,6 +21,7 @@ const classNames = (...classes) => {
 
 const Header = () => {
 	const [products, setProducts] = useState([]);
+	const history = useHistory();
 
 	useEffect(() => {
 		const cart = loadCart();
@@ -126,9 +127,7 @@ const Header = () => {
 							) : (
 								<button
 									onClick={() => {
-										signout(() => {
-											return <Redirect to="/" />;
-										});
+										signout(() => history.push("/"));
 									}}
 									className=" text-gray-900 bg-pink-100 hover:bg-pink-800 hover:text-pink-50
                           px-3 py-2 rounded-md font-medium "
@@ -191,9 +190,7 @@ const Header = () => {
 							) : (
 								<button
 									onClick={() => {
-										signout(() => {
-											return <Redirect to="/" />;
-										});
+										signout(() => history.push("/"));
 									}}
 									className=" text-gray-900 bg-pink-100 hover:bg-pink-800 hover:text-pink-50
                           px-3 py-2 rounded-md font-medium "
