@@ -5,7 +5,7 @@ import Base from "../Base";
 const PlantCare = () => {
 	return (
 		<Base>
-			<Gallery className="bg-[#ebe7ce]" />
+			<Gallery />
 		</Base>
 	);
 };
