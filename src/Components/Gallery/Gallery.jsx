@@ -53,11 +53,11 @@ const Gallery = () => {
 									src="https://jamaicacottageshop.com/wp-content/uploads/2020/09/indoor-plants-cabin-cottage-tiny-house-post-beam-interior-design.jpg"
 								/>
 							</div>
-							<div className="w-1/2 p-1 md:p-2">
+							<div className="w-full p-1 md:p-2">
 								<img
 									alt="gallery"
 									className="block object-cover object-center w-full h-full rounded-lg"
-									src="https://www.gannett-cdn.com/presto/2021/09/30/USAT/3cfbf41b-1edf-409e-b46c-a21000db34a8-hero_Getty_ImagesDelamine_Donson.png?width=660&height=372&fit=crop&format=pjpg&auto=webp"
+									src="https://www.gardeningknowhow.com/wp-content/uploads/2019/06/millenial.jpg"
 								/>
 							</div>
 							<div className="w-full p-1 md:p-2">
