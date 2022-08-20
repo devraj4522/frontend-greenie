@@ -34,14 +34,14 @@ const Gallery = () => {
 								<img
 									alt="gallery"
 									className="block object-cover object-center w-full h-full rounded-lg"
-									src="https://www.vogue.com/article/instagram-boys-with-plants-tips"
+									src="https://assets.vogue.com/photos/5c8ff73ac712fa2de624c06d/master/w_1600,c_limit/01-boys-with-plants-book.jpg"
 								/>
 							</div>
 							<div className="w-full p-1 md:p-2">
 								<img
 									alt="gallery"
 									className="block object-cover object-center w-full h-full rounded-lg"
-									src="https://www.vogue.com/article/instagram-boys-with-plants-tips"
+									src="https://assets.vogue.com/photos/5c8ff7a65554f22d24a5e4aa/master/w_1600,c_limit/02-boys-with-plants-book.jpg"
 								/>
 							</div>
 						</div>
