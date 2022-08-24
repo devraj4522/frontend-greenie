@@ -39,16 +39,15 @@ const Hero = () => {
 					{/* Buy button */}
 					<div className="flex max-w-200  justify-start space-x-4">
 						<ButtonRightIcon
-							onClick={history.push("/Shopping")}
+							link="/Shopping"
 							text="Buy Now"
-							className=""
 						>{""}
 								</ButtonRightIcon>
 						<ButtonLeftIcon
 							text="Upload Photo"
-							onClick={history.push("/care")}
+							link="/care"
 						>
-							{""}</ButtonLeftIcon>
+							</ButtonLeftIcon>
 					</div>
 				</div>
 
