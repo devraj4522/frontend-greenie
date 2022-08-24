@@ -1,8 +1,10 @@
 import React from "react";
 import { ChevronRightIcon } from "@heroicons/react/outline";
+import { Link } from "react-router-dom";
+
 const ButtonRightIcon = (props) => {
   return (
-    <button className="group font-semibold px-5 py-2 text-gray-50 bg-orange-500 hover:bg-orange-600 rounded-full">
+    <Link to={props.link} className="group font-semibold px-5 py-2 text-gray-50 bg-orange-500 hover:bg-orange-600 rounded-full">
       {props.text}
       <ChevronRightIcon
         className="transition
@@ -10,7 +12,7 @@ const ButtonRightIcon = (props) => {
             text-gray-900 ml-2 p-1 inline-block h-6 w-6 
             rounded-full bg-yellow-400 group-hover:bg-yellow-600"
       />
-    </button>
+    </Link>
   );
 };
 
