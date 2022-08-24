@@ -37,7 +37,7 @@ const Hero = () => {
 						</p>
 					</div>
 					{/* Buy button */}
-					<div className="flex max-w-200  justify-start space-x-4">
+					<div className="flex max-w-200 items-center justify-start space-x-4">
 						<ButtonRightIcon
 							link="/Shopping"
 							text="Buy Now"
