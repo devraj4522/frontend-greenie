@@ -46,7 +46,7 @@ const Hero = () => {
 						<ButtonLeftIcon
 							text="Upload Photo"
 							link="/care"
-						>
+						>{""}
 							</ButtonLeftIcon>
 					</div>
 				</div>
