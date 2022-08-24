@@ -9,8 +9,8 @@ import { toast } from "react-hot-toast";
 const Login = () => {
 	const [values, setValues] = useState({
 		name: "",
-		email: "",
-		password: "",
+		email: "test@test.com",
+		password: "1234",
 		error: "",
 		success: false,
 		loading: false,
