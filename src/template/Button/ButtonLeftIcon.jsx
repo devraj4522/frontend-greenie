@@ -8,7 +8,7 @@ const ButtonLeftIcon = (props) => {
       <CameraIcon
         className="transition
             ease-in-out delay-150 group-hover:-translate-x-[0.5rem]
-            text-gray-900 mr-2 p-2 inline-block h-8 w-8 
+            text-gray-900 mr-2 p-1 inline-block h-7 w-7 
             rounded-full bg-gray-300 group-hover:bg-gray-400"
       />
       {props.text}
