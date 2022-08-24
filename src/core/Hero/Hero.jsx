@@ -42,11 +42,13 @@ const Hero = () => {
 							onClick={history.push("/Shopping")}
 							text="Buy Now"
 							className=""
-						></ButtonRightIcon>
+						>{""}
+								</ButtonRightIcon>
 						<ButtonLeftIcon
 							text="Upload Photo"
 							onClick={history.push("/care")}
-						></ButtonLeftIcon>
+						>
+							{""}</ButtonLeftIcon>
 					</div>
 				</div>
 
