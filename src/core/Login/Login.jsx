@@ -9,13 +9,14 @@ import { toast } from "react-hot-toast";
 const Login = () => {
 	const [values, setValues] = useState({
 		name: "",
-		email: "test@test.com",
+		email: "email2@gmail.com",
 		password: "1234",
 		error: "",
 		success: false,
 		loading: false,
 		didRedirect: false,
 	});
+	
 	const { name, email, password, error, success, loading, didRedirect } =
 		values;
 
@@ -30,10 +31,11 @@ const Login = () => {
 		signin({ email, password })
 			.then((data) => {
 				// console.log("DATA", data);
-				if (data.token) {
+				if (data.custom_status_code == 0) {
 					//let sessionToken = data.token;
-					authenticate(data, () => {
-						console.log("TOKKEN ADDED");
+					const user_data = data.data_dict
+					authenticate(user_data, () => {
+						toast.success(data.status_msg);
 						setValues({
 							...values,
 							didRedirect: true,

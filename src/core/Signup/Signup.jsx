@@ -1,65 +1,74 @@
 import "./Singup.css";
-
 import LoginMain from "../../assets/images/login.png";
 import { LoginIcon } from "@heroicons/react/outline";
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
-import { signup, isAuthenticated } from "../../auth/helper";
+import { signup, isAuthenticated, authenticate } from "../../auth/helper";
 import Base from "../Base";
 import toast, { Toaster } from "react-hot-toast";
 
 const Signup = () => {
   const [values, setValues] = useState({
-    name: "",
-    email: "",
-    password: "",
+    name: "devraj",
+    email: "email.4522@gmail.com",
+    phone: "9122553300",
+    password: "1234",
+    gender: "MALE",
     error: "",
     success: false,
   });
 
-  const { name, email, password, error, success } = values;
+  const { name, email, phone, password, gender, error, success } = values;
 
   const handleChange = (name) => (event) => {
     setValues({ ...values, error: false, [name]: event.target.value });
   };
 
   const performRedirect = () => {
+    console.log(isAuthenticated())
     if (isAuthenticated()) {
       return <Redirect to="/" />;
     }
   };
 
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
     setValues({ ...values, error: false });
-    signup({ name, email, password })
+    console.log({ name, email, password, phone, gender })
+    const response = await signup({ name, email, password, phone, gender })
+
       .then((data) => {
-        console.log("DATA", data);
-        if (data.email === email) {
+        // console.log("Data: ", data)
+        if (data.custom_status_code == 0) {
           setValues({
             ...values,
             name: "",
             email: "",
             password: "",
+            gender: "",
+            phone: "",
             error: "",
             success: true,
           });
-          toast.success("New Account Created Please Login Now");
+          authenticate(data=data.data_dict, () => toast.success("Signup Successful."))
         } else {
           setValues({
             ...values,
+            success: true,
             error: true,
             success: false,
           });
           toast.error("Check All Fields Again!");
         }
       })
-      .catch((e) => console.log(e));
+      .catch((e) => toast.error("Check All Fields Again!"));
   };
+
 
   return (
     <Base>
       {performRedirect()}
+      {success &&  performRedirect()}
       <div className="login-main flex sm:items-center items-start min-h-screen px-3 py-6 sm:px-12 lg:justify-center">
         <div className="flex mx-auto flex-1 flex-col-reverse overflow-hidden rounded-md shadow-lg md:flex-row md:flex-1 lg:max-w-screen-md">
           <div className="p-5 bg-white md:flex-1">
@@ -120,6 +129,45 @@ const Signup = () => {
                   className="px-4 py-2 transition duration-300 border border-gray-300 rounded-full focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200"
                 />
               </div>
+              <div className="flex flex-col space-y-1">
+                <div className="flex items-center justify-between">
+                  <label
+                    for="phone"
+                    className="text-sm font-semibold text-gray-600"
+                  >
+                    Phone
+                  </label>
+                </div>
+                <input
+                  type="number"
+                  id="phone"
+                  value={phone}
+                  onChange={handleChange("phone")}
+                  className="px-4 py-2 transition duration-300 border border-gray-300 rounded-full focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200"
+                />
+              </div>
+
+
+              <div className="flex flex-col space-y-1">
+                <div className="flex items-center justify-between">
+                  <label
+                    for="gender"
+                    className="text-sm font-semibold text-gray-600"
+                  >
+                    Gender
+                  </label>
+                </div>
+
+                <select value={gender} onChange={handleChange("gender")}
+                  className="px-4 py-2 bg-gray-100 transition duration-300 border border-gray-300 rounded-full focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200"
+
+                >
+                  <option value="MALE">Male</option>
+                  <option value="FEMALE">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
               <div>
                 <button
                   type="submit"

@@ -37,8 +37,13 @@ const AddReview = ({ product, setReload, reload }) => {
       toast.error("User Not Found: Please Login to Your Account");
       return;
     }
-    const sendData = { title: title, description: desc, rating: rating };
-    postProductReviews(product, token, user.id, sendData).then((res) => {
+    const review = {
+      "title": title,
+      "description": desc,
+      "rating": rating,
+      "product": product,
+  };
+    postProductReviews(review).then((res) => {
       toast.success("Review Added");
       setReload(!reload);
       setDesc("");

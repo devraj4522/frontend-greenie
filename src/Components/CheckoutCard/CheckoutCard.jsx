@@ -15,7 +15,7 @@ const CheckoutCard = ({
 	return (
 		<div className=" rounded-md shadow-md hover:shadow-sm hover:opacity-80 flex space-x-1 text-left m-2 bg-zinc-100  items-center justify-start  relative ">
 			<img
-				src={product.image}
+				src={product.images?.images?.[0]}
 				alt=""
 				className="w-20 h-20 md:w-24 md:h-24"
 				srcSet=""

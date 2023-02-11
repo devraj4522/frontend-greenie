@@ -119,7 +119,7 @@ const Review = ({ product }) => {
 											>
 												<img
 													className="h-24 object-cover"
-													src={product.image}
+													src={product.images && product.images.images?product.images.images[0]:'https://res.cloudinary.com/dhcwfa4vu/image/upload/v1675602784/greenie/Category/woman-watering-houseplants-royalty-free-image-1616000139_gzkswt.jpg'}
 													alt=""
 												/>
 											</a>
@@ -214,11 +214,11 @@ const Review = ({ product }) => {
 												<p className=" text-sm text-gray-300">
 													Added{" "}
 													{getTimeAgo(
-														item.updated_at
+														item.modified
 													)["data"] +
 														" " +
 														getTimeAgo(
-															item.updated_at
+															item.modified
 														)["type"]}{" "}
 													ago
 												</p>

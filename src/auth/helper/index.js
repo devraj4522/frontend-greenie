@@ -1,48 +1,41 @@
+import axios from "axios";
 import { API } from "../../backend";
 import { cartEmpty } from "../../core/helper/cartHelper";
 
+
 export const signup = (user) => {
-  return fetch(`${API}user/`, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(user),
-  })
-    .then((response) => {
-      return response.json();
+  const payload = {
+    email: user.email,
+    name: user.name,
+    phone: user.phone,
+    password: user.password,
+    gender: user.gender
+  };
+
+  return axios.post(`${API}/user/user-account/`, payload)
+    .then(response => {
+        return response.data;
     })
-    .catch((err) => console.log(err));
+    .catch(error => {
+      return error;
+    });
 };
 
 export const signin = (user) => {
-  const formData = new FormData();
 
-  for (const name in user) {
-    console.log(user[name]);
-    formData.append(name, user[name]);
-  }
-
-  // const {email, password} = user;
-  // const formData = new FormData();
-  // formData.append('email', email)
-  // formData.append('password', password)
-
-  for (var key of formData.keys()) {
-    console.log("MYKEY: ", key);
-  }
-
-  return fetch(`${API}user/login/`, {
-    method: "POST",
-
-    body: formData,
-  })
-    .then((response) => {
-      console.log("SUCCESS", response);
-      return response.json();
+  const params = {
+    email: 'email2@gmail.com',
+    password: '1234',
+  };
+  
+  return axios.get(`${API}/user/user-account/`, {params})
+    .then(response => {
+      return response.data;
     })
-    .catch((err) => console.log(err));
+    .catch(error => {
+      return error;
+    });
+  
 };
 
 export const authenticate = (data, next) => {
@@ -75,6 +68,15 @@ export const getUser = () => {
   return;
 };
 
+export const getToken = () => {
+  if (typeof window == undefined)
+    return false;
+  if (localStorage.getItem("jwt")) {
+    return JSON.parse(localStorage.getItem("jwt"))["auth"]["token"];
+  }
+  return;
+}
+
 export const signout = (next) => {
   const userId = isAuthenticated() && isAuthenticated().user.id;
 
@@ -83,15 +85,7 @@ export const signout = (next) => {
   if (typeof window !== undefined) {
     localStorage.removeItem("jwt");
     cartEmpty(() => {});
-    //next();
+    next();
 
-    return fetch(`${API}user/logout/${userId}`, {
-      method: "GET",
-    })
-      .then((response) => {
-        console.log("Signout success");
-        next();
-      })
-      .catch((err) => console.log(err));
   }
 };

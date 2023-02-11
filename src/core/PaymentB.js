@@ -14,7 +14,7 @@ const PaymentB = ({ products, reload = undefined, setReload = (f) => f }) => {
 		error: "",
 		instance: {},
 	});
-
+	console.log(products)
 	const [orderSuccess, setOrderSuccess] = useState(false);
 
 	const userId = isAuthenticated && isAuthenticated().user.id;

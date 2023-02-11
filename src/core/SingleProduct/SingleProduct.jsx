@@ -33,11 +33,13 @@ const SingleProduct = (props) => {
 	const { id } = useParams();
 
 	useEffect(() => {
-		getSingleProduct(id).then((res) => setProduct(res));
+		getSingleProduct(id)
+		.then((res) => setProduct(res))
+		.catch(err => toast.error(err));
 		if (isAvailableInCart(id)) setIsAddedToCart(true);
 	}, []);
 
-	// console.log(isAvailableInCart(id));
+	console.log(product)
 
 	const FlipCartandRemove = () => {
 		if (!isAddedToCart)
@@ -75,7 +77,6 @@ const SingleProduct = (props) => {
 				<section className="text-gray-600 body-font overflow-hidden">
 					<div className="container px-5 py-24 mx-auto">
 						<h1 className="text-center my-[120px] font-bold text-4xl">
-							{" "}
 							{product.detail}
 						</h1>
 					</div>
@@ -92,13 +93,13 @@ const SingleProduct = (props) => {
 								<img
 									alt="ecommerce"
 									className="lg:w-1/2  bg-gradient-to-br from-zinc-500 via-zinc-300 to-zinc-100 w-full lg:h-auto h-64 object-cover object-center rounded"
-									src={product.image}
+									src={product.images && product.images.images?product.images.images[0]:'https://res.cloudinary.com/dhcwfa4vu/image/upload/v1675602784/greenie/Category/woman-watering-houseplants-royalty-free-image-1616000139_gzkswt.jpg'}
 								/>
 								<div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
 									<h2 className=" capitalize text-sm title-font text-gray-500 tracking-widest">
 										<span className=" font-semibold">
 											Plant Type:{" "}
-										</span>{" "}
+										</span>
 										{product.category}
 									</h2>
 									<h1 className="text-gray-900 text-4xl title-font font-bold mb-1">

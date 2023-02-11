@@ -1,25 +1,29 @@
 import React, { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { getCategory } from "../../core/helper/coreapicalls";
 
 const Category = () => {
 	const [categories, setCategories] = useState([]);
+
 	useEffect(() => {
-		getCategory().then((r) => setCategories(r));
+		getCategory().then((r) => {
+				setCategories(r)
+		});
 	}, []);
 
 	const Card = ({ item }) => {
 		return (
 			<Link
-				to={"category/" + item.name}
+				to={"category/" + item.id}
 				className="xl:w-1/3 md:w-1/2 p-4"
 			>
 				<div className=" bg-[#f5f5f2] p-6 rounded-lg hover:shadow-2xl shadow hover:cursor-pointer ">
 					<img
 						className="h-40 rounded w-full object-cover object-center mb-6"
 						src={
-							item.image
-								? item.image
+							(item.images && item.images && item.images.images)
+								? item.images.images[0]
 								: "https://images.unsplash.com/photo-1621076806681-a82129e952d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
 						}
 						alt="content"
@@ -37,6 +41,7 @@ const Category = () => {
 			</Link>
 		);
 	};
+	
 	return (
 		<section className="mx-0 px-4 text-center sm:text-left sm:px-12 md: lg:pt-12 pt-6 pb-6 xl:px-40 lg:pb-12 text-gray-600 body-font">
 			<div className="container mx-auto">

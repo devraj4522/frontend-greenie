@@ -8,21 +8,13 @@ const CardGallery = (props) => {
 	const [products, setProducts] = useState([]);
 	const [error, setError] = useState(false);
 
-	const loadAllProducts = () => {
-		getProducts().then((data) => {
-			if (data.error) {
-				setError(data.error);
-				console.log(error);
-			} else {
-				setProducts(data);
-			}
-		});
-	};
-
 	useEffect(() => {
-		loadAllProducts();
+		getProducts().then((data) => {
+			setProducts(data);
+	});
 	}, []);
 
+	console.log(products)
 	return (
 		<div className="mx-0 sm:px-12 md: pb-6 xl:px-40 lg:pb-12  px-4 text-center sm:text-left pt-6">
 			{/* <!-- Component Start --> */}
