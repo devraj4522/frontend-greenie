@@ -12,7 +12,7 @@ export const getProducts = async (page, categoryId) => {
 		'Content-Type': 'application/json',
 	  };
 	
-	return axios.get(`${API}/product/product-list/?page=${page}&category=${categoryId}`, { headers: headers })
+	return axios.get(`${API}/product/product-list/?page=${page}&category=${categoryId}`, { headers: headers }, )
 		.then((response) => {
 			if (response.status !== 200)
 				return []
