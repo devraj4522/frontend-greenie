@@ -21,7 +21,7 @@ const Search = () => {
 		// console.log("focus");
 		if (isActivated) return;
 
-		getProducts()
+		getProducts(1)
 			.then((res) =>
 				res.map((item) => {
 					return { name: item.name, id: item.id };

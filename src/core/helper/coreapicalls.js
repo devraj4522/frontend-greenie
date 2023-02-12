@@ -2,7 +2,7 @@ import axios from "axios";
 import { authenticate, getToken, getUser } from "../../auth/helper";
 import { API } from "../../backend";
 
-export const getProducts = async () => {
+export const getProducts = async (page, categoryId) => {
 	const token = getToken();
 
 	if (!token) return []
@@ -12,13 +12,13 @@ export const getProducts = async () => {
 		'Content-Type': 'application/json',
 	  };
 	
-	return axios.get(`${API}/product`, { headers: headers })
+	return axios.get(`${API}/product/product-list/?page=${page}&category=${categoryId}`, { headers: headers })
 		.then((response) => {
-			if (typeof response.data !== 'object' || !Array.isArray(response.data))
-        		return [];
+			if (response.status !== 200)
+				return []
 			return response.data;
 		})
-		.catch((err) => err);
+		.catch((err) => {throw new Error(err)});
 };
 
 export const getSingleProduct = async (id) => {
@@ -99,7 +99,7 @@ export const getCategory = async() => {
         		return [];
 			return response.data;
 		})
-		.catch((err) => err);
+		.catch((err) => {throw new Error(err)});
 };
 
 //localhost:8000/api/product/category/
