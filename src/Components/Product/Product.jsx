@@ -13,22 +13,20 @@ import { ShowProductImage } from "./ShowProductImage";
 
 const Product = ({
   product,
-  addtoCart = true,
-  removeFromCart = false,
   reload = undefined,
   setReload = (f) => f,
-  // function(f){return f}
+
 }) => {
   const [redirect, setRedirect] = useState(false);
-
   const cartTitle = product ? product.name : "A photo from pexels";
   const cartPrice = product ? product.price : "0";
 
-  const addToCart = () => {
-    if (isAuthenticated()) {
-      addItemToCart(product, () => setRedirect(true));
-      toast.success("Added to cart");
-    } else {
+  const addToCart = async () => {
+    try {
+      const response = await  addItemToCart(product.id, () => setRedirect(true));
+      console.log(response.status_msg)
+      await toast.success(response?.status_msg);
+    } catch {
       toast.error("Login Please!");
     }
   };
@@ -41,7 +39,6 @@ const Product = ({
 
   const showAddToCart = (addToCart) => {
     return (
-      addtoCart && (
         // <div className="flex justify-center items-end h-1/5">
         <button
           onClick={addToCart}
@@ -51,13 +48,11 @@ const Product = ({
           <ShoppingBagIcon className="-pt-1 h-6 pl-auto inline-block  text-slate-50 group-hover:text-slate-600" />
         </button>
         // </div>
-      )
     );
   };
 
-  const showRemoveFromCart = (removeFromCart) => {
+  const showRemoveFromCart = () => {
     return (
-      removeFromCart && (
         // <div className="flex justify-center items-end h-1/5">
         <button
           onClick={() => {
@@ -72,7 +67,6 @@ const Product = ({
           <ShoppingBagIcon className="-pt-1 h-6 pl-auto inline-block  text-slate-50 group-hover:text-slate-600" />
         </button>
         // </div>
-      )
     );
   };
 
@@ -98,7 +92,7 @@ const Product = ({
         </div>
       </div>
       {showAddToCart(addToCart)}
-      {showRemoveFromCart(removeFromCart)}
+      {/* {showRemoveFromCart()} */}
     </div>
   );
 };

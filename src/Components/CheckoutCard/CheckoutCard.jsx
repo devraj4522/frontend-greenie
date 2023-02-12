@@ -1,36 +1,42 @@
 import { TrashIcon } from "@heroicons/react/solid";
 import React from "react";
+import { toast } from "react-hot-toast";
 import { removeItemFromCart } from "../../core/helper/cartHelper";
 import ButtonRightIcon from "../../template/Button/ButtonRightIcon";
+import { ShowCartImage } from "./ShowCartImage";
 
 const CheckoutCard = ({
-	product,
+	order,
 	addtoCart = true,
 	removeFromCart,
 	reload = undefined,
 	setReload = (f) => f,
+	setIsLoading = (f) => f,
 	// function(f){return f}
 }) => {
-	// console.log(product);
+	console.log(order);
 	return (
 		<div className=" rounded-md shadow-md hover:shadow-sm hover:opacity-80 flex space-x-1 text-left m-2 bg-zinc-100  items-center justify-start  relative ">
-			<img
-				src={product.images?.images?.[0]}
-				alt=""
-				className="w-20 h-20 md:w-24 md:h-24"
-				srcSet=""
-			/>
+			<ShowCartImage images={order?.product?.images} />
 			<div className="p-2">
-				<h2 className="pb-1 font-semibold text-md">{product.name}</h2>
+				<h2 className="pb-1 font-semibold text-md">{order?.product?.name}</h2>
 				<p className=" font-bold text-lime-600 text-lg">
 					{"₹ "}
-					{product.price}
+					{order?.product?.price}
 				</p>
 			</div>
 			<button
-				onClick={() => {
-					removeItemFromCart(product.id);
-					setReload(!reload);
+				onClick={async () => {
+					try {
+						setIsLoading(true)
+						const res = await removeItemFromCart(order?.product?.id);
+						await setReload(!reload);
+						toast.success("Item Removed.")
+						setIsLoading(false)
+					} catch (error) {
+						toast.error("Error occured.")
+					}
+					
 				}}
 				className=" right-3 text-slate-600 hover:text-rose-600  absolute"
 			>

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { toast } from "react-hot-toast";
 import CheckoutCard from "../Components/CheckoutCard/CheckoutCard";
 import Product from "../Components/Product/Product";
+import Spinner from "../template/Spinner/Spinner";
 import Base from "./Base";
 
 import Card from "./Card";
@@ -9,30 +11,32 @@ import PaymentB from "./PaymentB";
 
 const Cart = () => {
 	const [reload, setReload] = useState(false);
-	const [products, setProducts] = useState([]);
+	const [orders, setOrders] = useState([]);
+	const [isLoading, setIsLoading] = useState(true);
 
-	useEffect(() => {
-		setProducts(loadCart());
+	useEffect(async() => {
+		try {
+			const response = await loadCart();
+			console.log(response);
+			setOrders(response?.data_dict);
+			setIsLoading(false);
+		} catch (error) {
+			toast.error("Error occured in loading Cart!")			
+		}
 	}, [reload]);
-
-	const loadAllProducts = (products) => {
+	console.log(isLoading)
+	const loadAllProducts = (orders) => {
 		return (
 			<div>
-				{products.map((product, id) => (
-					// <Product
-					//   key={index}
-					//   product={product}
-					//   removeFromCart={true}
-					//   addtoCart={false}
-					//   reload={reload}
-					//   setReload={setReload}
-					// />
+				{isLoading && <Spinner /> }
+				{orders.map((order, id) => (
 					<CheckoutCard
-						product={product}
+						order={order}
 						removeFromCart={true}
 						addtoCart={false}
 						reload={reload}
 						setReload={setReload}
+						setIsLoading = {setIsLoading}
 						key={id}
 					/>
 				))}
@@ -52,14 +56,14 @@ const Cart = () => {
 		<Base title="Cart page" description="Welcome to checkout">
 			<div className=" bg-[#ebe7ce] min-h-[600px] mx-0 px-3 sm:pl-12 py-12 xl:px-40 lg:py-32 grid md:grid-cols-2 gap-4  grid-cols-1 text-center">
 				<div className="grid grid-cols-1">
-					{products.length > 0 ? (
-						loadAllProducts(products)
+					{orders.length > 0 ? (
+						loadAllProducts(orders)
 					) : (
-						<h4>No products</h4>
+						<h4>No orders</h4>
 					)}
 				</div>
 				<div className="col-6">
-					<PaymentB products={products} setReload={setReload} />
+					<PaymentB orders={orders} setReload={setReload} />
 				</div>
 			</div>
 		</Base>

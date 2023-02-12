@@ -4,7 +4,7 @@ import { API } from "../../backend";
 
 export const getProducts = async (page, categoryId) => {
 	const token = getToken();
-
+	console.log(token)
 	if (!token) return []
 
 	const headers = {
