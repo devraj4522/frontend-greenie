@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { getCategory } from "../../core/helper/coreapicalls";
+import { ShowCategoryImage } from "./ShowCategoryImage";
 
 const Category = () => {
 	const [categories, setCategories] = useState([]);
 
 	useEffect(() => {
 		getCategory().then((r) => {
-				setCategories(r)
-		});
+			setCategories(r)
+		})
+		.catch(err => toast.error(err));
 	}, []);
 
 	const Card = ({ item }) => {
@@ -19,15 +21,7 @@ const Category = () => {
 				className="xl:w-1/3 md:w-1/2 p-4"
 			>
 				<div className=" bg-[#f5f5f2] p-6 rounded-lg hover:shadow-2xl shadow hover:cursor-pointer ">
-					<img
-						className="h-40 rounded w-full object-cover object-center mb-6"
-						src={
-							(item.images && item.images && item.images.images)
-								? item.images.images[0]
-								: "https://images.unsplash.com/photo-1621076806681-a82129e952d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-						}
-						alt="content"
-					/>
+					<ShowCategoryImage images={item.images} />
 					<h3 className="uppercase tracking-widest text-indigo-500 text-xs font-medium title-font">
 						{item.subtitle}
 					</h3>
@@ -51,11 +45,11 @@ const Category = () => {
 				</h2>
 				{categories.length === 0 && (
 					<div className="mx-0 sm:px-12 md: pb-6 xl:px-40 lg:pb-12">
-						<div class="flex justify-center items-center">
+						<div className="flex justify-center items-center">
 							<div role="status">
 								<svg
 									aria-hidden="true"
-									class="mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+									className="mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
 									viewBox="0 0 100 101"
 									fill="none"
 									xmlns="http://www.w3.org/2000/svg"
@@ -69,7 +63,7 @@ const Category = () => {
 										fill="currentFill"
 									/>
 								</svg>
-								<span class="sr-only">Loading...</span>
+								<span className="sr-only">Loading...</span>
 							</div>
 						</div>
 					</div>

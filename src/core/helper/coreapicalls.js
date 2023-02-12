@@ -2,7 +2,7 @@ import axios from "axios";
 import { authenticate, getToken, getUser } from "../../auth/helper";
 import { API } from "../../backend";
 
-export const getProducts = () => {
+export const getProducts = async () => {
 	const token = getToken();
 
 	if (!token) return []
@@ -12,7 +12,6 @@ export const getProducts = () => {
 		'Content-Type': 'application/json',
 	  };
 	
-	console.log("get")
 	return axios.get(`${API}/product`, { headers: headers })
 		.then((response) => {
 			if (typeof response.data !== 'object' || !Array.isArray(response.data))
@@ -22,17 +21,14 @@ export const getProducts = () => {
 		.catch((err) => err);
 };
 
-export const getSingleProduct = (id) => {
+export const getSingleProduct = async (id) => {
 	const token = getToken();
-
-	if (!token) return []
 
 	const headers = {
 		'Authorization': `Token ${token}`,
 		'Content-Type': 'application/json',
 	  };
 	
-	console.log("get")
 	return axios.get(`${API}/product/${id}`, { headers: headers })
 		.then((response) => {
 			if (response.data && response.data.detail)
@@ -42,7 +38,7 @@ export const getSingleProduct = (id) => {
 		.catch((err) => err);
 };
 
-export const getProductReviews = (id) => {
+export const getProductReviews = async (id) => {
 	const token = getToken();
 
 	if (!token) return []
@@ -62,7 +58,7 @@ export const getProductReviews = (id) => {
 		.catch((err) => err);
 };
 
-export const postProductReviews = (review) => {
+export const postProductReviews = async (review) => {
 	const token = getToken();
 	const user = getUser()
 	if (!token || !user) throw("Login first!")
@@ -80,17 +76,16 @@ export const postProductReviews = (review) => {
 	console.log(review)
 	return axios.post(`${API}/product/review/`, payload, {headers: headers})
 		.then((response) => {
-			if (response.data && response.data.detail)
+			if (response.status && response.data.detail)
         		throw response.data.detail;
 			return response.data;
 		})
 		.catch((err) => err);
 };
 
-export const getCategory = () => {
+export const getCategory = async() => {
 	const token = getToken();
-
-	if (!token) return []
+	if (!token) throw("Login First")
 
 	const headers = {
 		'Authorization': `Token ${token}`,
@@ -98,7 +93,7 @@ export const getCategory = () => {
 	  };
 	
 	
-	return axios.get(`${API}/product/category/`, { headers: headers })
+	return await axios.get(`${API}/product/category/`, { headers: headers })
 		.then((response) => {
 			if (typeof response.data !== 'object' || !Array.isArray(response.data))
         		return [];
@@ -108,7 +103,7 @@ export const getCategory = () => {
 };
 
 //localhost:8000/api/product/category/
-export const getProductByCategory = (category) => {
+export const getProductByCategory = async (category) => {
 	const token = getToken();
 
 	if (!token) return []
@@ -130,7 +125,7 @@ export const getProductByCategory = (category) => {
 
 
 //localhost:8000/api/product/category/
-export const submitContactForm = (submitedData) => {
+export const submitContactForm = async (submitedData) => {
 	const formData = new FormData();
 
 	for (const name in submitedData) {

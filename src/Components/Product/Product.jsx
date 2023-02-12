@@ -1,5 +1,5 @@
 import { ShoppingBagIcon } from "@heroicons/react/solid";
-import "./Product.css";
+import classes from  "./Product.module.css";
 import React, { useState } from "react";
 import { Redirect, Link } from "react-router-dom";
 import ImageHelper from "../../core/helper/ImageHelper";
@@ -9,6 +9,7 @@ import {
   removeItemFromCart,
 } from "../../core/helper/cartHelper";
 import toast from "react-hot-toast";
+import { ShowProductImage } from "./ShowProductImage";
 
 const Product = ({
   product,
@@ -76,10 +77,11 @@ const Product = ({
   };
 
   return (
-    <div className=" grid auto-cols-fr justify-between items-center shadow-xl relative rounded-sm px-6 pb-6 hover:cursor-pointer productMain">
+    <div className={`${classes.productMain} grid auto-cols-fr justify-between items-center shadow-xl relative rounded-sm px-6 pb-6 hover:cursor-pointer`}>
       <Link to={"/single/" + product.id}>
         {/* {getAredirect(redirect)} */}
-        <ImageHelper product={product} className="text-center object-fill" />
+        <ShowProductImage images={product?.images} />
+        {/* <ImageHelper product={product} className="text-center object-fill" /> */}
       </Link>
       <div className="grid grid-flow-col space-x-2 auto-cols-auto items-center justify-between ">
         <div className="grid  auto-rows-max">

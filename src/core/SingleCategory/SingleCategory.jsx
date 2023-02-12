@@ -26,28 +26,28 @@ const SingleCategory = () => {
 
 	const CTA = () => {
 		return (
-			<div class=" py-6 sm:py-8 lg:py-12">
-				<div class="max-w-screen-2xl px-4 md:px-8 mx-auto">
-					<div class="md:h-80 flex flex-col sm:flex-row bg-gray-900 rounded-lg overflow-hidden">
+			<div className=" py-6 sm:py-8 lg:py-12">
+				<div className="max-w-screen-2xl px-4 md:px-8 mx-auto">
+					<div className="md:h-80 flex flex-col sm:flex-row bg-gray-900 rounded-lg overflow-hidden">
 						{/* <!-- content - start --> */}
-						<div class="w-full sm:w-1/2 lg:w-2/5 flex flex-col p-4 sm:p-8">
-							<h2 class="text-white text-xl md:text-2xl lg:text-4xl font-bold mb-4">
+						<div className="w-full sm:w-1/2 lg:w-2/5 flex flex-col p-4 sm:p-8">
+							<h2 className="text-white text-xl md:text-2xl lg:text-4xl font-bold mb-4">
 								End of Season Sale
 								<br />
 								Up to 70% off.
 							</h2>
 
-							<p class="max-w-md text-gray-400 mb-8">
+							<p className="max-w-md text-gray-400 mb-8">
 								Buy outdoor & indoor plants online in India at
 								best prices from MyBageecha.Wide range, fast
 								delivery & prompt support.COD Available.Buy
 								Plants Online Now.
 							</p>
 
-							<div class="mt-auto">
+							<div className="mt-auto">
 								<Link
 									to="/Shopping"
-									class="inline-block bg-pink-600 text-white hover:bg-pink-700 active:bg-pink-800 focus-visible:ring ring-indigo-300 text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"
+									className="inline-block bg-pink-600 text-white hover:bg-pink-700 active:bg-pink-800 focus-visible:ring ring-indigo-300 text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"
 								>
 									Save now
 								</Link>
@@ -56,12 +56,12 @@ const SingleCategory = () => {
 						{/* <!-- content - end --> */}
 
 						{/* <!-- image - start --> */}
-						<div class="w-full sm:w-1/2 lg:w-3/5 h-48 sm:h-auto order-first sm:order-none bg-gray-700">
+						<div className="w-full sm:w-1/2 lg:w-3/5 h-48 sm:h-auto order-first sm:order-none bg-gray-700">
 							<img
 								src="https://images.unsplash.com/photo-1583753075968-1236ccb83c66?auto=format&q=75&fit=crop&crop=top&w=1000&h=500"
 								loading="lazy"
 								alt="Photo by Dom Hill"
-								class="w-full h-full object-cover object-center"
+								className="w-full h-full object-cover object-center"
 							/>
 						</div>
 						{/* <!-- image - end --> */}

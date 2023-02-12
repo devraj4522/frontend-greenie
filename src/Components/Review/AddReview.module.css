@@ -1,0 +1,12 @@
+.changeSvg svg {
+  display: inline-block !important;
+}
+
+
+.roundImage {
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  width: 80px;
+  border: 1px solid bisque;
+}

@@ -24,8 +24,8 @@ export const signup = (user) => {
 export const signin = (user) => {
 
   const params = {
-    email: 'email2@gmail.com',
-    password: '1234',
+    email: user.email,
+    password: user.password,
   };
   
   return axios.get(`${API}/user/user-account/`, {params})
@@ -80,7 +80,7 @@ export const getToken = () => {
 export const signout = (next) => {
   const userId = isAuthenticated() && isAuthenticated().user.id;
 
-  console.log("USERID: ", userId);
+  // console.log("USERID: ", userId);
 
   if (typeof window !== undefined) {
     localStorage.removeItem("jwt");

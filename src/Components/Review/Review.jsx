@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { getProductReviews } from "../../core/helper/coreapicalls";
+import { CloudImage } from "../../template/Images/CloudImage";
 import AddReview from "./AddReview";
+import { ShowReviewImage } from "./ShowReviewImage";
 
 const Review = ({ product }) => {
 	const [review, setreview] = useState([]);
@@ -118,7 +120,7 @@ const Review = ({ product }) => {
 												href="#"
 											>
 												<img
-													className="h-24 object-cover"
+													className="h-24 object-cover w-50 rounded-md"
 													src={product.images && product.images.images?product.images.images[0]:'https://res.cloudinary.com/dhcwfa4vu/image/upload/v1675602784/greenie/Category/woman-watering-houseplants-royalty-free-image-1616000139_gzkswt.jpg'}
 													alt=""
 												/>
@@ -178,17 +180,9 @@ const Review = ({ product }) => {
 									className="mb-6 shadow-lg rounded-t-8xl rounded-b-5xl overflow-hidden"
 								>
 									<div className="pt-3 pb-3 md:pb-1 px-4 md:px-16 bg-white bg-opacity-40">
-										<div className="flex flex-wrap items-center">
-											<img
-												className="mr-6 w-20"
-												src={
-													item.user.image
-														? item.user.image
-														: "https://www.raritanheadwaters.org/wp-content/uploads/2018/09/user-avatar-1.png"
-												}
-												alt=""
-											/>
-											<h4 className="w-full md:w-auto text-xl font-heading font-medium">
+										<div className={` flex flex-wrap items-center`}>
+											<ShowReviewImage user = {item.user} images= {item.user.images}/>
+											<h4 className="w-full ml-2 md:w-auto text-xl font-heading font-medium">
 												{item.user.name}
 											</h4>
 											<div className="w-full md:w-px h-2 md:h-8 mx-8 bg-transparent md:bg-gray-200"></div>

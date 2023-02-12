@@ -15,8 +15,10 @@ import SingleCategory from "./core/SingleCategory/SingleCategory";
 import Profile from "./core/Profile/Profile";
 import Contact from "./core/Contact/Contact";
 import PlantCare from "./core/PlantCare/PlantCare";
+import { isAuthenticated } from "./auth/helper";
 
 const Routes = () => {
+	  
 	return (
 		<>
 			<BrowserRouter>
@@ -24,10 +26,10 @@ const Routes = () => {
 					<Route path="/" exact component={Home} />
 					<Route path="/signup" exact component={Signup} />
 					<Route path="/signin" exact component={Login} />
-					<Route path="/shopping" exact component={Shopping} />
+					<PrivateRoutes path="/shopping" exact component={Shopping} />
 					<Route path="/contact" exact component={Contact} />
 					<Route path="/care" exact component={PlantCare} />
-					<Route path="/cart" exact component={Cart} />
+					<PrivateRoutes path="/cart" exact component={Cart} />
 					<Route
 						path="/category/:id"
 						exact

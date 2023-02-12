@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { Rating } from "react-simple-star-rating";
+import { css } from "react-star-rating-input";
 import { useRef } from "react/cjs/react.production.min";
 import { authenticate, getUser, isAuthenticated } from "../../auth/helper";
 import { postProductReviews } from "../../core/helper/coreapicalls";
-import "./AddReview.css";
 import Review from "./Review";
+import classes from "./AddReview.module.css";
+
 
 const AddReview = ({ product, setReload, reload }) => {
   const [rating, setRating] = useState(0);
@@ -43,13 +45,20 @@ const AddReview = ({ product, setReload, reload }) => {
       "rating": rating,
       "product": product,
   };
-    postProductReviews(review).then((res) => {
+    postProductReviews(review)
+    .then((res) => {
+      if (res.satus != 200) 
+      {
+        toast.error("Check all fields");
+        return;
+      }
       toast.success("Review Added");
       setReload(!reload);
       setDesc("");
       setTitle("");
       setRating(1);
-    });
+    })
+    .catch(error => toast.error("Check your input"));
   };
 
   return (
@@ -81,7 +90,7 @@ const AddReview = ({ product, setReload, reload }) => {
 
         <div>
           <Rating
-            className="changeSvg"
+            className={`${classes.changeSvg}`}
             onClick={handleRating}
             ratingValue={rating}
             size={32}
