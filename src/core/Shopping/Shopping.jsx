@@ -5,12 +5,13 @@ import CardGallery from "../CardGallery/CardGallery";
 import "./Shopping.css";
 
 const Shopping = () => {
-	const [categories, setCategories] = useState([])
+	const [categories, setCategories] = useState([]);
+	const loadCategories = (items) => setCategories(items);
 	return (
 		<Base>
 			<div className="shoppingMain">
-				<Category setCategories={setCategories}/>
 				<CardGallery categories={categories}/>
+				<Category setCategories={loadCategories}/>
 			</div>
 		</Base>
 	);

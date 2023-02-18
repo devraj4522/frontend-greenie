@@ -1,24 +1,34 @@
-import React, { Fragment, StrictMode } from "react";
-import Header from "./core/Header/Header.jsx";
-import Hero from "./core/Hero/Hero.jsx";
-import Section2 from "./core/Section2/Section2.jsx";
-import Login from "./core/Login/Login.jsx";
-import Signup from "./core/Signup/Signup.jsx";
-import CardGallery from "./core/CardGallery/CardGallery.jsx";
-import Footer from "./core/Footer/Footer.jsx";
-import Product from "./core/Product/Product.jsx";
+import React, { StrictMode, useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
+import { Route } from "react-router-dom";
+import { ProductsContext } from "./Context/MainContext";
+import { loadCart } from "./core/helper/cartHelper";
+import Routes from "./Routes";
 
 export default function App() {
+  const [cartitems, setCartItems] = useState([])
+	const [reloadCart, setReloadCart] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
+
+	useEffect(async () => {
+		try {
+			setIsLoading(true)
+			const response = await loadCart();
+			setCartItems(response?.data_dict);
+			setIsLoading(false)
+		} catch (error) {
+			toast.error("Error occured in loading Cart!")
+		}
+	}, [reloadCart]);
+
+	const toggleLoading = () => setIsLoading(!isLoading);
+	const toggleReloadCart = () => setReloadCart(!reloadCart);
+
   return (
     <StrictMode>
-      {/* <Header /> */}
-      {/* <Hero /> */}
-      {/* <Login /> */}
-      {/* <Signup /> */}
-      {/* <CardGallery /> */}
-      {/* <Product /> */}
-      {/* <Footer /> */}
-      {/* <Section2 /> */}
+		<ProductsContext.Provider value={{cartitems, toggleLoading, toggleReloadCart, isLoading}}>
+    <Routes />
+    </ProductsContext.Provider>
     </StrictMode>
   );
 }

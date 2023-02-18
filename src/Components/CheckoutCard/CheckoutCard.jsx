@@ -1,20 +1,14 @@
 import { TrashIcon } from "@heroicons/react/solid";
-import React from "react";
+import React, {useContext} from "react";
 import { toast } from "react-hot-toast";
+import { ProductsContext } from "../../Context/MainContext";
 import { removeItemFromCart } from "../../core/helper/cartHelper";
 import ButtonRightIcon from "../../template/Button/ButtonRightIcon";
 import { ShowCartImage } from "./ShowCartImage";
 
-const CheckoutCard = ({
-	order,
-	addtoCart = true,
-	removeFromCart,
-	reload = undefined,
-	setReload = (f) => f,
-	setIsLoading = (f) => f,
-	// function(f){return f}
-}) => {
-	console.log(order);
+const CheckoutCard = ({order}) => {
+	const {toggleReloadCart} = useContext(ProductsContext);
+
 	return (
 		<div className=" rounded-md shadow-md hover:shadow-sm hover:opacity-80 flex space-x-1 text-left m-2 bg-zinc-100  items-center justify-start  relative ">
 			<ShowCartImage images={order?.product?.images} />
@@ -28,11 +22,9 @@ const CheckoutCard = ({
 			<button
 				onClick={async () => {
 					try {
-						setIsLoading(true)
 						const res = await removeItemFromCart(order?.product?.id);
-						await setReload(!reload);
+						await toggleReloadCart();
 						toast.success("Item Removed.")
-						setIsLoading(false)
 					} catch (error) {
 						toast.error("Error occured.")
 					}

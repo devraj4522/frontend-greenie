@@ -18,7 +18,7 @@ import PlantCare from "./core/PlantCare/PlantCare";
 import { isAuthenticated } from "./auth/helper";
 
 const Routes = () => {
-	  
+		 
 	return (
 		<>
 			<BrowserRouter>

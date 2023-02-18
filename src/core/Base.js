@@ -1,8 +1,6 @@
 import React from "react";
-
 import Footer from "./Footer/Footer";
 import Header from "./Header/Header";
-// import Menu from "./Menu";
 import { Toaster } from "react-hot-toast";
 
 const Base = ({ children }) => {

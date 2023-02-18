@@ -11,15 +11,8 @@ import CardGallery from "./CardGallery/CardGallery";
 
 export default function Home() {
   return (
-    <Base title="Home Page" description="Welcome to Tshirt store">
+    <Base title="Home Page" description="Welcome to Plant store">
       <div className="row">
-        {/* {products.map((product, index) => {
-          return (
-            <div key={index} className="col-4 mb-4">
-              <Product product={product} />
-            </div>
-          );
-        })} */}
         <Hero />
         <Section2 />
       </div>

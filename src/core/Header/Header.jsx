@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Disclosure } from "@headlessui/react";
 import "./Header.css";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
@@ -7,6 +7,7 @@ import { Link, useHistory } from "react-router-dom";
 import { ShoppingBagIcon } from "@heroicons/react/solid";
 import { loadCart } from "../helper/cartHelper";
 import Search from "../../Components/Search/Search";
+import { ProductsContext } from "../../Context/MainContext";
 
 const navigation = [
 	{ name: "Home", href: "/", current: false },
@@ -19,15 +20,9 @@ const classNames = (...classes) => {
 	return classes.filter(Boolean).join(" ");
 };
 
-const Header = () => {
-	const [products, setProducts] = useState([]);
+const Header = (props) => {
 	const history = useHistory();
-
-	useEffect(() => {
-		const cart = loadCart();
-		setProducts(cart);
-		// ref.current = products.length
-	}, []);
+	const {cartitems, toggleLoading, isLoading} = useContext(ProductsContext);
 
 	return (
 		<Disclosure
@@ -94,7 +89,7 @@ const Header = () => {
 												style={{ fontSize: "10px" }}
 												className=" absolute -bottom-1 -right-1"
 											>
-												{products && products.length}
+												{cartitems && cartitems.length}
 											</p>
 										</Link>
 									)}
@@ -207,7 +202,7 @@ const Header = () => {
 										style={{ fontSize: "10px" }}
 										className=" absolute -bottom-1 -right-1"
 									>
-										{products && products.length}
+										{cartitems && cartitems.length}
 									</p>
 								</Link>
 							)}
