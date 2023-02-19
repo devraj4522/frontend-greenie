@@ -1,18 +1,24 @@
+import axios from "axios";
+import { getToken } from "../../auth/helper";
 import { API } from "../../backend";
 
-export const createOrder = (userId, token, orderData) => {
-  const formData = new FormData();
+export const createOrder = (orderInfo) => {
 
-  for (const name in orderData) {
-    formData.append(name, orderData[name]);
-  }
+  const payload = {...orderInfo}
 
-  return fetch(`${API}order/add/${userId}/${token}/`, {
-    method: "POST",
-    body: formData,
-  })
-    .then((response) => {
-      return response.json();
-    })
-    .catch((err) => console.log(err));
+  const token = getToken();
+	if (!token) return []
+
+	const headers = {
+		'Authorization': `Token ${token}`,
+		'Content-Type': 'application/json',
+	  };
+	
+  	return axios.post(`${API}/payment/makepayment/`, payload, { headers: headers })
+		.then((response) => {
+      if (response.status == 200)
+			  return response.data.data_dict;
+      else throw Error("Error in processing order.")
+		})
+		.catch((err) => err);
 };

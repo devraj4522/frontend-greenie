@@ -38,7 +38,7 @@ const Cart = (props) => {
 					)}
 				</div>
 				<div className="col-6">
-					<PaymentB orders={cartitems} />
+					<PaymentB/>
 				</div>
 			</div>
 		</Base>

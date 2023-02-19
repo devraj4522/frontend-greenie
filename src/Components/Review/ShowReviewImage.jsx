@@ -9,7 +9,7 @@ export const ShowReviewImage = (props) => {
         image = imageList[0].public_id;
     }
 
-    console.log(classes)
+    // console.log(classes)
     if (!image && props.user?.name) {
         image = `https://www.gravatar.com/avatar/${props.user?.name}?d=identicon&s=70`
         return (<img src={image} className={`${classes.roundImage}`} />);

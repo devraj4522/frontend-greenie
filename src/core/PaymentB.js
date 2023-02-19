@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Redirect } from "react-router-dom";
 import { cartEmpty } from "./helper/cartHelper";
 import { getmeToken, processPayment } from "./helper/paymentHelper";
 import { createOrder } from "./helper/orderHelper";
 import { isAuthenticated, signout } from "../auth/helper";
 import DropIn from "braintree-web-drop-in-react";
+import { ProductsContext } from "../Context/MainContext";
+import { toast } from "react-hot-toast";
 
-const PaymentB = ({ products, reload = undefined, setReload = (f) => f }) => {
+const PaymentB = ({}) => {
+	const {cartitems, toggleReloadCart} = useContext(ProductsContext);
+
 	const [info, setInfo] = useState({
 		loading: false,
 		success: false,
@@ -14,14 +18,15 @@ const PaymentB = ({ products, reload = undefined, setReload = (f) => f }) => {
 		error: "",
 		instance: {},
 	});
-	console.log(products)
+
 	const [orderSuccess, setOrderSuccess] = useState(false);
-
+	const products = cartitems;
+	
 	const userId = isAuthenticated && isAuthenticated().user.id;
-	const token = isAuthenticated && isAuthenticated().token;
+	const token = isAuthenticated && isAuthenticated().auth.token;
 
-	const getToken = (userId, token) => {
-		getmeToken(userId, token).then((info) => {
+	const getToken = () => {
+		getmeToken().then((info) => {
 			if (info.error) {
 				setInfo({
 					...info,
@@ -38,28 +43,36 @@ const PaymentB = ({ products, reload = undefined, setReload = (f) => f }) => {
 	};
 
 	useEffect(() => {
-		getToken(userId, token);
+		getToken();
 	}, []);
 
 	const getAmount = () => {
 		let amount = 0;
 		products.map((p) => {
-			amount = amount + parseInt(p.price);
+			// console.log(products.map(obj => obj.product.id))
+			amount = amount + parseInt(p.product.price);
 		});
 		return amount;
 	};
 
-	const onPurchase = () => {
+	const onPurchase = async() => {
 		setInfo({ loading: true });
 		let nonce;
-		let getNonce = info.instance.requestPaymentMethod().then((data) => {
+		let getNonce = await info.instance.requestPaymentMethod().then(async (data) => {
 			console.log("MYDATA", data);
 			nonce = data.nonce;
 			const paymentData = {
-				paymentMethodNonce: nonce,
-				amount: getAmount(),
+				"paymentMethodNonce": nonce,
+				"amount": getAmount(),
+				"products": products.map(obj => obj.product.id),
+				"address_id": "EZPOJSIT"
 			};
-			processPayment(userId, token, paymentData)
+			
+			const orderData = {"is_order_through_cart": true,
+								"address_id": "EZPOJSIT"}
+			await createOrder(orderData);
+
+			await processPayment(paymentData)
 				.then((response) => {
 					console.log("POINT-1", response);
 					if (response.error) {
@@ -76,47 +89,28 @@ const PaymentB = ({ products, reload = undefined, setReload = (f) => f }) => {
 							loading: false,
 						});
 						console.log("PAYMENT SUCCESS");
-
+						// console.log(products)
 						let product_names = "";
 						products.forEach(function (item) {
-							product_names += item.name + ", ";
+							product_names += item.product.name + ", ";
 						});
-
+						// console.log(response)
 						const orderData = {
 							products: product_names,
 							transaction_id: response.transaction.id,
 							amount: response.transaction.amount,
 						};
-						createOrder(userId, token, orderData)
-							.then((response) => {
-								if (response.error) {
-									if (response.code === "1") {
-										console.log("Order Failed!");
-										signout(() => {
-											return <Redirect to="/" />;
-										});
-									}
-								} else {
-									if (response.success === true) {
-										console.log("ORDER PLACED!!");
-									}
-								}
-							})
-							.catch((error) => {
-								setInfo({ loading: false, success: false });
-								console.log("Order FAILED", error);
-							});
 						cartEmpty(() => {
 							// console.log("Did we got a crash?");
 							setOrderSuccess(true);
 						});
 
-						setReload(!reload);
+						toggleReloadCart();
 					}
 				})
 				.catch((error) => {
 					setInfo({ loading: false, success: false });
-					console.log("PAYMENT FAILED", error);
+					toast.error("PAYMENT FAILED", error);
 				});
 		});
 	};

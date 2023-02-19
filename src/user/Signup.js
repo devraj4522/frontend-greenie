@@ -23,7 +23,7 @@ const Signup = () => {
     setValues({ ...values, error: false });
     signup({ name, email, password })
       .then((data) => {
-        console.log("DATA", data);
+        // console.log("DATA", data);
         if (data.email === email) {
           setValues({
             ...values,

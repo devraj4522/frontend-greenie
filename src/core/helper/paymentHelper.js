@@ -1,29 +1,42 @@
+import axios from "axios";
+import { getToken } from "../../auth/helper";
 import { API } from "../../backend";
 
-export const getmeToken = (userId, token) => {
-  return fetch(`${API}payment/gettoken/${userId}/${token}/`, {
-    method: "GET",
-  })
-    .then((response) => {
-      return response.json();
-    })
-    .catch((err) => console.log(err));
+export const getmeToken = async () => {
+  const token = getToken();
+	if (!token) return []
+
+	const headers = {
+		'Authorization': `Token ${token}`,
+		'Content-Type': 'application/json',
+	  };
+	
+  	return axios.get(`${API}/payment/gettoken/`, { headers: headers })
+		.then((response) => {
+      if (response.status == 200)
+			  return response.data.data_dict;
+      else throw Error("Error in generation of payment token.")
+		})
+		.catch((err) => err);
 };
 
-export const processPayment = (userId, token, paymentInfo) => {
-  const formData = new FormData();
+export const processPayment = (paymentInfo) => {
 
-  for (const name in paymentInfo) {
-    formData.append(name, paymentInfo[name]);
-  }
+  const payload = {...paymentInfo}
 
-  return fetch(`${API}payment/process/${userId}/${token}/`, {
-    method: "POST",
-    body: formData,
-  })
-    .then((response) => {
-      console.log("p-0", response);
-      return response.json();
-    });
-  //.catch((err) => console.log(err));
+  const token = getToken();
+	if (!token) return []
+
+	const headers = {
+		'Authorization': `Token ${token}`,
+		'Content-Type': 'application/json',
+	  };
+	
+  	return axios.post(`${API}/payment/makepayment/`, payload, { headers: headers })
+		.then((response) => {
+      if (response.status == 200)
+			  return response.data.data_dict;
+      else throw Error("Error in generation of payment token.")
+		})
+		.catch((err) => err);
 };

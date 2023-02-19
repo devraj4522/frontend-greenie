@@ -73,7 +73,7 @@ export const postProductReviews = async (review) => {
 		...review,
 		"user": user.id
 	};
-	console.log(review)
+	// console.log(review)
 	return axios.post(`${API}/product/review/`, payload, {headers: headers})
 		.then((response) => {
 			if (response.status && response.data.detail)

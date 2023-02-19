@@ -24,7 +24,7 @@ const Product = ({
   const addToCart = async () => {
     try {
       const response = await  addItemToCart(product.id, () => setRedirect(true));
-      console.log(response.status_msg)
+      // console.log(response.status_msg)
       await toast.success(response?.status_msg);
     } catch {
       toast.error("Login Please!");
