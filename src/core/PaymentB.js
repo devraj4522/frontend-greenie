@@ -64,7 +64,7 @@ const PaymentB = ({}) => {
 			const paymentData = {
 				"paymentMethodNonce": nonce,
 				"amount": getAmount(),
-				"products": products.map(obj => obj.product.id),
+				"products": products.map(prod => prod.product.id),
 				"address_id": "EZPOJSIT"
 			};
 			

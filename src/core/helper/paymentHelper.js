@@ -31,7 +31,7 @@ export const processPayment = (paymentInfo) => {
 		'Authorization': `Token ${token}`,
 		'Content-Type': 'application/json',
 	  };
-	
+	console.log(payload)
   	return axios.post(`${API}/payment/makepayment/`, payload, { headers: headers })
 		.then((response) => {
       if (response.status == 200)

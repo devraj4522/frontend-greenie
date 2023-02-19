@@ -14,7 +14,7 @@ export const createOrder = (orderInfo) => {
 		'Content-Type': 'application/json',
 	  };
 	
-  	return axios.post(`${API}/payment/makepayment/`, payload, { headers: headers })
+  	return axios.post(`${API}/order/create-order/`, payload, { headers: headers })
 		.then((response) => {
       if (response.status == 200)
 			  return response.data.data_dict;
