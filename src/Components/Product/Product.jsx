@@ -1,6 +1,6 @@
 import { ShoppingBagIcon } from "@heroicons/react/solid";
 import classes from  "./Product.module.css";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Redirect, Link } from "react-router-dom";
 import ImageHelper from "../../core/helper/ImageHelper";
 import { isAuthenticated } from "../../auth/helper";
@@ -10,13 +10,13 @@ import {
 } from "../../core/helper/cartHelper";
 import toast from "react-hot-toast";
 import { ShowProductImage } from "./ShowProductImage";
+import { ProductsContext } from "../../Context/MainContext";
 
 const Product = ({
   product,
-  reload = undefined,
-  setReload = (f) => f,
 
 }) => {
+  const {toggleReloadCart} = useContext(ProductsContext);
   const [redirect, setRedirect] = useState(false);
   const cartTitle = product ? product.name : "A photo from pexels";
   const cartPrice = product ? product.price : "0";
@@ -26,6 +26,7 @@ const Product = ({
       const response = await  addItemToCart(product.id, () => setRedirect(true));
       // console.log(response.status_msg)
       await toast.success(response?.status_msg);
+      toggleReloadCart();
     } catch {
       toast.error("Login Please!");
     }
@@ -57,7 +58,7 @@ const Product = ({
         <button
           onClick={() => {
             removeItemFromCart(product.id);
-            setReload(!reload);
+            toggleReloadCart()
 
             console.log("Product removed from cart");
           }}

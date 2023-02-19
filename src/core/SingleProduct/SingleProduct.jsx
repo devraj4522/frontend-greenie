@@ -6,7 +6,7 @@ import {
 } from "@material-tailwind/react";
 import "./SingleProduct.css";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import ButtonRightIcon from "../../template/Button/ButtonRightIcon";
 import Base from "../Base";
 import {

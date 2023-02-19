@@ -19,11 +19,11 @@ export const addItemToCart = async (item, next) => {
     .then((response) => {
       if (response.status !== 200)
         throw ("Error in adding to cart");
-      if (response.data.custom_status_code)  throw("Check the data again...")
+      if (response.data.custom_status_code)  throw("Check the data again...");
+      next();
       return response.data;
     })
     .catch((err) => err);
-  next();
 };
 
 
