@@ -90,21 +90,12 @@ const PaymentB = ({}) => {
 						});
 						console.log("PAYMENT SUCCESS");
 						// console.log(products)
-						let product_names = "";
-						products.forEach(function (item) {
-							product_names += item.product.name + ", ";
-						});
-						// console.log(response)
-						const orderData = {
-							products: product_names,
-							transaction_id: response.transaction.id,
-							amount: response.transaction.amount,
-						};
-						cartEmpty(() => {
-							// console.log("Did we got a crash?");
-							setOrderSuccess(true);
-						});
-
+						// const orderData = {
+						// 	products: product_names,
+						// 	transaction_id: response.transaction.id,
+						// 	amount: response.transaction.amount,
+						// };
+						setOrderSuccess(true);
 						toggleReloadCart();
 					}
 				})
