@@ -8,7 +8,7 @@ import DropIn from "braintree-web-drop-in-react";
 import { ProductsContext } from "../Context/MainContext";
 import { toast } from "react-hot-toast";
 
-const PaymentB = ({}) => {
+const PaymentB = ({delevery_adddress_id}) => {
 	const {cartitems, toggleReloadCart} = useContext(ProductsContext);
 
 	const [info, setInfo] = useState({
@@ -69,7 +69,7 @@ const PaymentB = ({}) => {
 			};
 			
 			const orderData = {"is_order_through_cart": true,
-								"address_id": "EZPOJSIT"}
+								"address_id": delevery_adddress_id}
 			await createOrder(orderData);
 
 			await processPayment(paymentData)

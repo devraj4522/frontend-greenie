@@ -38,6 +38,39 @@ export const getSingleProduct = async (id) => {
 		.catch((err) => err);
 };
 
+
+export const getUserAddresses = async (user_id) => {
+	const token = getToken();
+
+	const headers = {
+		'Authorization': `Token ${token}`,
+		'Content-Type': 'application/json',
+	  };
+	
+	return axios.get(`${API}/user/user-address-list?user=${user_id}`, { headers: headers })
+		.then((response) => {
+			return response.data;
+		})
+		.catch((err) => err);
+};
+
+export const createUserAddresses = async (address_info) => {
+	const token = getToken();
+
+	const headers = {
+		'Authorization': `Token ${token}`,
+		'Content-Type': 'application/json',
+	  };
+	
+	  const payload = {...address_info}
+	
+	return axios.post(`${API}/user/create-address/`, payload, { headers: headers })
+		.then((response) => {
+			return response.data;
+		})
+		.catch((err) => err);
+};
+
 export const getProductReviews = async (id) => {
 	const token = getToken();
 
