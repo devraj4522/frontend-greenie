@@ -93,7 +93,7 @@ const SingleProduct = (props) => {
 								<img
 									alt="ecommerce"
 									className="lg:w-1/2  bg-gradient-to-br from-zinc-500 via-zinc-300 to-zinc-100 w-full lg:h-auto h-64 object-cover object-center rounded"
-									src={(product.images.length && product.images[0].public_id)? 'https://res.cloudinary.com/dhcwfa4vu/image/upload/c_fill/v1' + product.images[0].public_id: "https://res.cloudinary.com/dhcwfa4vu/image/upload/c_fill/v1/product_image/ZZ%20Plant%20-%20Medium_Indoor_DNMPHVKG" }
+									src={(product.images.length && product.images[0].public_id)? 'https://res.cloudinary.com/dhcwfa4vu/image/upload/c_fill/v1' + product.images[0].public_pk: "https://res.cloudinary.com/dhcwfa4vu/image/upload/c_fill/v1/product_image/ZZ%20Plant%20-%20Medium_Indoor_DNMPHVKG" }
 								/>
 								<div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
 									<h2 className=" capitalize text-sm title-font text-gray-500 tracking-widest">
