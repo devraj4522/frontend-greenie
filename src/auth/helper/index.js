@@ -2,6 +2,14 @@ import axios from "axios";
 import { API } from "../../backend";
 import { cartEmpty } from "../../core/helper/cartHelper";
 
+export const ping = () => {
+  try {
+    axios.get(`${API}/ping`);
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
 
 export const signup = (user) => {
   const payload = {

@@ -8,8 +8,14 @@ import Hero from "./Hero/Hero";
 import Section2 from "./Section2/Section2";
 import Product from "./Product/Product";
 import CardGallery from "./CardGallery/CardGallery";
+import { ping } from "../auth/helper";
 
 export default function Home() {
+
+  useEffect(() => {
+    ping();
+  }, []);
+
   return (
     <Base title="Home Page" description="Welcome to Plant store">
       <div className="row">
